@@ -12,7 +12,7 @@ except KeyError:
     print("No GITHUB_ACCESS_TOKEN environment variable.")
     sys.exit(1)
 
-BASE_URL = " https://api.github.com/search"
+BASE_URL = "https://api.github.com/search"
 
 def get_args(prog):
     helpm = f"Example: \r\n{prog} -q \"NOT in:descritpion library NOT in:readme exercise stars:500..5000 language:Java -f java_repos_semgrep.txt -s 10000\""
