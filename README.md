@@ -9,6 +9,8 @@ python3 find_repos.py -q "stars:500..5000 language:Java created:>2017-10-11 sort
 
 `-q/--query` - search query
 
-`-f/--filename` - path and filename where results will be stored
+`-f/--filename` - path where results will be stored
 
 `-s/--size` - filter repos bigger than given size in bytes
+
+`-d/--docker` - filter repos with docker support
