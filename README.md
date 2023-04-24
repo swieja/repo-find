@@ -1,5 +1,5 @@
 # Repo fiding tool
-This tool finds repositories using github API based on given query and conditions and returns direct URLs to them. 
+This tool finds repositories using github API based on given query, conditions and returns direct URLs to them. 
 
 Currently using custom blacklist.
 Usage:
