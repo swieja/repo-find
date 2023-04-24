@@ -4,7 +4,7 @@ This tool finds repositories using github API based on given query and condition
 Currently using custom blacklist.
 Usage:
 ```bash
-python3 find_repos.py -q "stars:500..5000 language:Java created:>2017-10-11 sort:updated" -f /tmp/results.txt -s 10000
+python3 find_repos.py -q "stars:500..5000 language:Java created:>2017-10-11 sort:updated" -f /tmp/results.txt -s 10000 -d
 ```
 
 `-q/--query` - search query
