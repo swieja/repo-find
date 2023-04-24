@@ -124,9 +124,5 @@ if __name__ == "__main__":
         final(listOfDockerRepos)
 
     else:
-<<<<<<< HEAD
         final(repoList)
         
-=======
-        print("Didn't provide filename argument, not saving.")
->>>>>>> 3544501fdbc51365e25270f963109e61de216f21
