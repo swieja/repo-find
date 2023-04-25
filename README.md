@@ -1,4 +1,4 @@
-# Repo fiding tool
+# Repo find
 This tool finds repositories using github API based on given query, conditions and returns direct URLs to them. 
 
 Currently using custom blacklist. \
