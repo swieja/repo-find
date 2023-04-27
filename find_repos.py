@@ -104,7 +104,7 @@ if __name__ == "__main__":
                         reposCheckDocker.append(item['url'])
                         
 
-        sleep(10) # sleep in case of rate limit
+        sleep(3) # sleep in case of rate limit
 
     #saving repos that only have docker/Dockerfile
     #regex to grab url of repo only from /contents/ API request
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     if args.hasDockerfile:
         listOfDockerRepos = []
         for i in reposCheckDocker:
-            sleep(5)
+            sleep(1)
             r = s.get(f"{i}/contents/",headers=headers)
             data = json.loads(r.text)
             for item in data:
