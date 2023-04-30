@@ -23,7 +23,6 @@ def get_args(prog):
     parser.add_argument('-q','--query',dest="searchQuery",action='store',type=str,required=True)
     parser.add_argument('-f','--filename',dest="storedFile",action='store',type=str,required=False)
     parser.add_argument('-s','--size',dest="sizeOfRepo",action='store',type=int,required=True)
-    parser.add_argument('-c', '--compare', dest='compareList', action='store', type=str, required=False)
     parser.add_argument('-d', '--docker', dest='hasDockerfile', action='store_const', const=True, default=False,required=False)
     return parser.parse_args()
 
