@@ -6,6 +6,8 @@ from os import environ,path
 from time import sleep
 from argparse import ArgumentParser, RawTextHelpFormatter
 
+DESC_BLACKLIST = ["bootcamp", "bootcamps", "beginner", "beginners", "exercise", "exercises", "labs", "course", "shellcode", "payload", "wrapper","installer","hacking","hacker","c2","multiplayer","player","minecraft"]
+REPO_OWNER_BLACKLIST = ["microsoft","dotnet","azure","tutorial","firefox","chrome","google","hacking","hacker","c2","multiplayer","player","minecraft","metamask","duckduckgo","owasp"]
 
 try: 
     ACCESS_TOKEN = environ["GITHUB_ACCESS_TOKEN"]
@@ -21,10 +23,11 @@ def get_args(prog):
     parser.add_argument('-q','--query',dest="searchQuery",action='store',type=str,required=True)
     parser.add_argument('-f','--filename',dest="storedFile",action='store',type=str,required=False)
     parser.add_argument('-s','--size',dest="sizeOfRepo",action='store',type=int,required=True)
-    parser.add_argument('-d', '--docker', dest='hasDockerfile', action='store_const', const=True, default=False)
+    parser.add_argument('-c', '--compare', dest='compareList', action='store', type=str, required=False)
+    parser.add_argument('-d', '--docker', dest='hasDockerfile', action='store_const', const=True, default=False,required=False)
     return parser.parse_args()
 
-def final(repoList):
+def finalSave(repoList):
     finalList = list(set(repoList))
     finalList.sort()
     if args.storedFile:
@@ -85,8 +88,7 @@ if __name__ == "__main__":
     repoList = []
     reposCheckDocker = []
     #custom blacklist
-    unwantedDescriptionKeywords = ["bootcamp", "bootcamps", "beginner", "beginners", "exercise" , "exercises" , "labs" , "course", "shellcode", "payload", "wrapper","installer","hacking","hacker","c2","multiplayer","player","minecraft"]
-    unwantedRepoOwnerName = ["microsoft","dotnet","azure","tutorial","firefox","chrome","google","hacking","hacker","c2","multiplayer","player","minecraft","metamask","duckduckgo","owasp"]
+
 
     for page in range(0,totalNumberOfRelevantPages,1):
         r = s.get(f"{BASE_URL}/repositories?q={query}&page={page}",headers=headers)
@@ -95,8 +97,8 @@ if __name__ == "__main__":
             repoDescription = item['description']
             repoLogin = item['html_url']
             if (item['size'] > args.sizeOfRepo):
-                if not any(string in str(repoDescription).lower() for string in unwantedDescriptionKeywords):
-                    if not any(string in str(repoLogin).lower() for string in unwantedRepoOwnerName):
+                if not any(string in str(repoDescription).lower() for string in DESC_BLACKLIST):
+                    if not any(string in str(repoLogin).lower() for string in REPO_OWNER_BLACKLIST):
                         repoCounter += 1
                         repoList.append(item['html_url'])
 
@@ -118,11 +120,7 @@ if __name__ == "__main__":
             for item in data:
                 if "docker" in item["name"].lower():
                     listOfDockerRepos.append(re.search(getUrl,item["html_url"]).group(1))
-            
 
-        
-        final(listOfDockerRepos)
-
+        finalSave(listOfDockerRepos)
     else:
-        final(repoList)
-        
+        finalSave(repoList)
